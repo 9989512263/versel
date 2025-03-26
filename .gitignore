@@ -74,3 +74,4 @@ temp/
 *.bak
 *.tmp
 *.temp
+.vercel
