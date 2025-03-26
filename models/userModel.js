@@ -31,7 +31,7 @@ const UserSchema=new mongoose.Schema({
     password:{
         type:String,
         required:true,
-        unique:true,
+        // unique:true,
         minlength: 6,
         validate: {
           validator: function(value) {

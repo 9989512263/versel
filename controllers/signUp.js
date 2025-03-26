@@ -6,15 +6,14 @@ const nodemailer=require("nodemailer");
 
 
 const signUp=async(req,res)=>{
-    const {name,email,password}=req.body;
+    const {name,email,password,role}=req.body;
     if(!name||!email||!password){
         return res.status(400).json({message:"Please Enter all the details"})
     }
-    const user=await User.find({email});
+    const user=await User.findOne({email});
+
     if(user){
-       if(user.role=="user"&& user.role=="admin"){
-        return res.status(400).json({message:"you already exists in both"});
-       }
+        return res.status(400).json({message:"you already exists "});
     }
     const userId = Math.floor(100000 + Math.random() * 900000); 
 
