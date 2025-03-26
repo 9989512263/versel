@@ -1,7 +1,7 @@
 const User=require("../models/userModel");
 const { v4: uuidv4 } = require("uuid");
 const nodemailer=require("nodemailer");
-//soiwefhnoiwejsdcpwjfiopnerv
+//soiwefhnoiwejsdcpwjfiopnervhgnfnfbfgbdfbfbcfbcfbcf
 
 
 
@@ -171,4 +171,3 @@ const signUp=async(req,res)=>{
 module.exports={signUp};
 
 
-///hi this 
