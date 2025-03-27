@@ -11,6 +11,7 @@ const adminsignUp=async(req,res)=>{
         return res.status(400).json({message:"Please Enter all the details"})
     }
     const user=await User.findOne({email});
+    
     if(user){
         if(user.role=="admin"){
         return res.status(400).json({message:"He is already an user So cant add again"})

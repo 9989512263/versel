@@ -1,62 +1,65 @@
-const mongoose = require('mongoose');
-
-const roomSchema = new mongoose.Schema({
-  roomNumber: {
-    type: String,
-    required: true, 
-    unique: true, 
-  },
-  roomType: {
-    type: String,
-    required: true,
-    enum: ['single', 'double', 'suite', 'penthouse'], 
-  },
-  price: {
-    type: Number,
-    required: true, 
-    min: 0,         
-  },
-  status: {
-    type: String,
-    required: true,  
-    enum: ['available', 'booked', 'maintenance'], 
-    default: 'available'
-  },
-  created_at: {
-    type: Date,
-    default: Date.now, 
-  },
-});
+const mongoose = require("mongoose");
+const validator=require("validator")
 
 const hotelSchema = new mongoose.Schema({
-  hotelId: {
-    type: String,
-    required: true, 
-    unique: true,  
-  },
   name: {
     type: String,
-    required: true, 
+    required: true,
+    trim: true,
+    minlength: 3,
   },
   location: {
     type: String,
-    required: true, 
+    required: true,
+    trim: true,
   },
   description: {
     type: String,
+    required: true,
+    minlength: 10,
   },
-  adminId: {
-    type: String,
+  stars: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5,
+  },
+  amenities: {
+    type: [String],
+    required: true,
+    validate: {
+      validator: function (value) {
+        return value.length > 0;
+      },
+      message: "At least one amenity is required.",
+    },
+  },
+  contact: { 
+    type: String, 
     required: true, 
-    unique: true,
+    validate: {
+        validator: (value) => validator.isMobilePhone(value, 'any'),
+        message: (props) => `${props.value} is not a valid phone number!`
+    }
+},
+  admin: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
-  rooms: [roomSchema],  // Rooms as sub-documents
-  created_at: {
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
+  createdAt: {
     type: Date,
-    default: Date.now, 
-  }
+    default: Date.now,
+  },
+  hotelId: {
+    type: Number,
+    unique: true, 
+    required: true,
+  },
 });
 
-const Hotel = mongoose.model('Hotel', hotelSchema);
-
-module.exports = Hotel;
+module.exports = mongoose.model("Hotel", hotelSchema);

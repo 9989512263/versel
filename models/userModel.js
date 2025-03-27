@@ -31,7 +31,6 @@ const UserSchema=new mongoose.Schema({
     password:{
         type:String,
         required:true,
-        // unique:true,
         minlength: 6,
         validate: {
           validator: function(value) {
@@ -42,5 +41,5 @@ const UserSchema=new mongoose.Schema({
         
     }
 })
-// UserSchema.index({ email: 1, role: 1 }, { unique: true });
+
 module.exports=mongoose.model("User",UserSchema);
