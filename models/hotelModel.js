@@ -42,9 +42,8 @@ const hotelSchema = new mongoose.Schema({
         message: (props) => `${props.value} is not a valid phone number!`
     }
 },
-  admin: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+  adminId: {
+    type: String, 
     required: true,
   },
   isActive: {
@@ -56,7 +55,7 @@ const hotelSchema = new mongoose.Schema({
     default: Date.now,
   },
   hotelId: {
-    type: Number,
+    type: String,
     unique: true, 
     required: true,
   },

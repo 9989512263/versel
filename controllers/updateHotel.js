@@ -1,16 +1,21 @@
 const Hotel = require('../models/hotelModel');
+const User=require('../models/userModel');
 
 const updateHotel = async (req, res) => {
-    const { hotelId } = req.params;
+    const { hotelId } = req.body;
     const { name, location, description, stars, amenities, contact, admin } = req.body;
-    
-    const hotel = await Hotel.findById(hotelId);
+
+    const hotel = await Hotel.findOne({ hotelId });
     try {
-        if(!name|| !location||!description||!stars||!amenities||!contact||!admin){
-            return res.status(400).json({ message: "please enter all details " });  
+        if (!name || !location || !description || !stars || !amenities || !contact || !admin) {
+            return res.status(400).json({ message: "please enter all details " });
         }
         if (!hotel) {
             return res.status(404).json({ message: "Hotel not found!" });
+        }
+        const adminUser = await User.findOne({ _id: admin, role: "admin" });
+        if (!adminUser) {
+            return res.status(400).json({ message: "Invalid admin! User does not have admin role." });
         }
 
         hotel.name = name;
@@ -28,4 +33,4 @@ const updateHotel = async (req, res) => {
     }
 };
 
-module.exports =updateHotel ;
+module.exports = updateHotel;
