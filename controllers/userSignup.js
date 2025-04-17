@@ -3,7 +3,6 @@ const { v4: uuidv4 } = require("uuid");
 const nodemailer = require("nodemailer");
 
 
-///hi this is kiran kumar cls
 
 
 const signUp = async (req, res) => {
@@ -170,7 +169,7 @@ const signUp = async (req, res) => {
                 return res.status(400).json({ message: "Error in sending email" });
             }
             else {
-                console.log({ message: "user Email sent successfully", "userId": userId, "password": password });
+                return res.status(200).json({ success: "data inserted" , message: "user Email sent successfully", "userId": userId, "password": password });
             }
 
         })

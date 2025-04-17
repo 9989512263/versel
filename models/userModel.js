@@ -28,6 +28,13 @@ const UserSchema=new mongoose.Schema({
         type:String,
         required:false
     },
+    otp: {
+        type: String,
+    },
+    subscription:{
+        type:Boolean,
+        default:false
+    },
     password:{
         type:String,
         required:true,

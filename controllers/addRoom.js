@@ -17,10 +17,10 @@ const addRoomToHotel = async (req, res) => {
         if (hotel.adminId !== adminId) {
             return res.status(403).json({ message: "Unauthorized! Only the assigned admin can add rooms to this hotel." });
         }
-        // const existingRoom = await Room.findOne({ hotelId}, roomNumber );
-        // if (existingRoom) {
-        //     return res.status(400).json({ message: "Room with this number already exists in the hotel!" });
-        // }
+        const existingRoom = await Room.findOne({ hotelId}, roomNumber );
+        if (existingRoom) {
+            return res.status(400).json({ message: "Room with this number already exists in the hotel!" });
+        }
         const newRoom = new Room({
             hotel: hotelId,
             roomNumber,

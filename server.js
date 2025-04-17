@@ -16,7 +16,7 @@ app.use(cors());
 
 // or if you want to allow only specific origins:
 app.use(cors({
-    origin: 'http://localhost:500', // Adjust the origin according to your front-end URL
+    origin: 'http://localhost:5173', // Adjust the origin according to your front-end URL
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));

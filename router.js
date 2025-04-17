@@ -8,6 +8,7 @@ const updateHotel = require("./controllers/updateHotel");
 const getallHotels = require("./controllers/getallHotels");
 const deleteHotel = require("./controllers/deleteHotel");
 const addRoomToHotel = require("./controllers/addRoom");
+const { sendOTP, verifyOTP, resetPassword } = require("./controllers/forgotpassword");
 
 
 
@@ -22,6 +23,12 @@ router.post("/signup",signUp);
 router.get("/getallusers",getAllUsers);
 router.post("/adminsignup",adminsignUp);
 router.post("/signin",Signin);
+
+//forgot password
+router.post("/sendotp",sendOTP);
+router.post("/verifyotp",verifyOTP);
+router.post("/resetpassword",resetPassword);
+
 
 
 //hotel module
